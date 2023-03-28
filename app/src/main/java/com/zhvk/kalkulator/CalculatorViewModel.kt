@@ -1,6 +1,5 @@
 package com.zhvk.kalkulator
 
-import android.util.Log
 import androidx.lifecycle.ViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -9,7 +8,8 @@ import kotlinx.coroutines.flow.update
 
 data class CalculatorUiState(
     val displayedValue: String = "0",
-    val secondValue: String = "",
+    val firstOperand: String? = null,
+    val secondOperand: String? = null,
     val operation: String = "",
     val isOperationClicked: Boolean = false,
 )
@@ -19,36 +19,47 @@ class CalculatorViewModel : ViewModel() {
     private val _uiState = MutableStateFlow(CalculatorUiState())
     val uiState: StateFlow<CalculatorUiState> = _uiState.asStateFlow()
 
-    fun updateDisplayValue(char: Char) {
+    fun typeNumber(char: Char) {
         _uiState.update { currentState ->
+            val newValue: String
+
             // Start typing new value after operation is clicked
             if (currentState.isOperationClicked) {
+                newValue = char.toString()
                 currentState.copy(
-                    displayedValue = char.toString(),
+                    displayedValue = newValue,
+                    secondOperand = newValue,
                     isOperationClicked = false,
                 )
             } else {
+                newValue = if (currentState.displayedValue == "0") char.toString()
+                else currentState.displayedValue + char
                 currentState.copy(
-                    displayedValue = if (currentState.displayedValue == "0") char.toString()
-                    else currentState.displayedValue + char,
+                    displayedValue = newValue,
+                    secondOperand = newValue
                 )
             }
         }
     }
 
     fun setOperation(operation: String) {
+        // This shows result when user consecutively presses operation buttons
+        if (_uiState.value.firstOperand != null && _uiState.value.secondOperand != null
+            && !_uiState.value.isOperationClicked
+        ) calculate()
+
         _uiState.update { currentState ->
             currentState.copy(
                 operation = operation,
                 isOperationClicked = true,
-                secondValue = currentState.displayedValue,
+                firstOperand = currentState.displayedValue,
             )
         }
     }
 
     fun calculate() {
-        val operand1 = _uiState.value.secondValue.toDoubleOrNull()
-        val operand2 = _uiState.value.displayedValue.toDoubleOrNull()
+        val operand1 = _uiState.value.firstOperand?.toDoubleOrNull()
+        val operand2 = _uiState.value.secondOperand?.toDoubleOrNull()
         var result: Double? = null
 
         when (_uiState.value.operation) {
@@ -72,8 +83,8 @@ class CalculatorViewModel : ViewModel() {
 
         _uiState.update { currentState ->
             currentState.copy(
-                secondValue = currentState.displayedValue,
                 displayedValue = fixResult(result),
+                firstOperand = fixResult(result)
             )
         }
     }

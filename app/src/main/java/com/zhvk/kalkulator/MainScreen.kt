@@ -93,21 +93,21 @@ fun MainScreen(
                     action = "7",
                     textColor = White,
                     background = Gray,
-                    onClick = { viewModel.updateDisplayValue('7') })
+                    onClick = { viewModel.typeNumber('7') })
                 CalculatorItem(modifier = Modifier
                     .aspectRatio(1f)
                     .weight(1f),
                     action = "8",
                     textColor = White,
                     background = Gray,
-                    onClick = { viewModel.updateDisplayValue('8') })
+                    onClick = { viewModel.typeNumber('8') })
                 CalculatorItem(modifier = Modifier
                     .aspectRatio(1f)
                     .weight(1f),
                     action = "9",
                     textColor = White,
                     background = Gray,
-                    onClick = { viewModel.updateDisplayValue('9') })
+                    onClick = { viewModel.typeNumber('9') })
                 CalculatorItem(modifier = Modifier
                     .aspectRatio(1f)
                     .weight(1f),
@@ -129,21 +129,21 @@ fun MainScreen(
                     action = "4",
                     textColor = White,
                     background = Gray,
-                    onClick = { viewModel.updateDisplayValue('4') })
+                    onClick = { viewModel.typeNumber('4') })
                 CalculatorItem(modifier = Modifier
                     .aspectRatio(1f)
                     .weight(1f),
                     action = "5",
                     textColor = White,
                     background = Gray,
-                    onClick = { viewModel.updateDisplayValue('5') })
+                    onClick = { viewModel.typeNumber('5') })
                 CalculatorItem(modifier = Modifier
                     .aspectRatio(1f)
                     .weight(1f),
                     action = "6",
                     textColor = White,
                     background = Gray,
-                    onClick = { viewModel.updateDisplayValue('6') })
+                    onClick = { viewModel.typeNumber('6') })
                 CalculatorItem(modifier = Modifier
                     .aspectRatio(1f)
                     .weight(1f),
@@ -165,21 +165,21 @@ fun MainScreen(
                     action = "1",
                     textColor = White,
                     background = Gray,
-                    onClick = { viewModel.updateDisplayValue('1') })
+                    onClick = { viewModel.typeNumber('1') })
                 CalculatorItem(modifier = Modifier
                     .aspectRatio(1f)
                     .weight(1f),
                     action = "2",
                     textColor = White,
                     background = Gray,
-                    onClick = { viewModel.updateDisplayValue('2') })
+                    onClick = { viewModel.typeNumber('2') })
                 CalculatorItem(modifier = Modifier
                     .aspectRatio(1f)
                     .weight(1f),
                     action = "3",
                     textColor = White,
                     background = Gray,
-                    onClick = { viewModel.updateDisplayValue('3') })
+                    onClick = { viewModel.typeNumber('3') })
                 CalculatorItem(modifier = Modifier
                     .aspectRatio(1f)
                     .weight(1f),
@@ -201,14 +201,14 @@ fun MainScreen(
                     action = "0",
                     textColor = White,
                     background = Gray,
-                    onClick = { viewModel.updateDisplayValue('0') })
+                    onClick = { viewModel.typeNumber('0') })
                 CalculatorItem(modifier = Modifier
                     .aspectRatio(1f)
                     .weight(1f),
                     action = ".",
                     textColor = White,
                     background = Gray,
-                    onClick = { viewModel.updateDisplayValue('.') })
+                    onClick = { viewModel.typeNumber('.') })
                 CalculatorItem(
                     modifier = Modifier
                         .aspectRatio(1f)
