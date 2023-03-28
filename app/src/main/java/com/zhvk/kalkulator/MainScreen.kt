@@ -4,16 +4,23 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import androidx.lifecycle.viewmodel.compose.viewModel
 import com.zhvk.kalkulator.ui.theme.*
 
 @Composable
-fun MainScreen() {
+fun MainScreen(
+    viewModel: CalculatorViewModel = viewModel()
+) {
+    val uiState by viewModel.uiState.collectAsStateWithLifecycle()
+
     Box(
         modifier = Modifier
             .fillMaxSize()
@@ -30,7 +37,7 @@ fun MainScreen() {
         ) {
 
             Text(
-                text = "0",
+                text = uiState.displayedValue,
                 modifier = Modifier.fillMaxWidth(),
                 fontSize = 72.sp,
                 fontWeight = FontWeight.Light,
@@ -71,7 +78,7 @@ fun MainScreen() {
                     action = "/",
                     textColor = White,
                     background = Orange,
-                    onClick = {})
+                    onClick = { viewModel.setOperation("/") })
             }
 
             // 2nd row
@@ -86,28 +93,28 @@ fun MainScreen() {
                     action = "7",
                     textColor = White,
                     background = Gray,
-                    onClick = {})
+                    onClick = { viewModel.updateDisplayValue('7') })
                 CalculatorItem(modifier = Modifier
                     .aspectRatio(1f)
                     .weight(1f),
                     action = "8",
                     textColor = White,
                     background = Gray,
-                    onClick = {})
+                    onClick = { viewModel.updateDisplayValue('8') })
                 CalculatorItem(modifier = Modifier
                     .aspectRatio(1f)
                     .weight(1f),
                     action = "9",
                     textColor = White,
                     background = Gray,
-                    onClick = {})
+                    onClick = { viewModel.updateDisplayValue('9') })
                 CalculatorItem(modifier = Modifier
                     .aspectRatio(1f)
                     .weight(1f),
                     action = "X",
                     textColor = White,
                     background = Orange,
-                    onClick = {})
+                    onClick = { viewModel.setOperation("X") })
             }
 
             // 3rd row
@@ -122,28 +129,28 @@ fun MainScreen() {
                     action = "4",
                     textColor = White,
                     background = Gray,
-                    onClick = {})
+                    onClick = { viewModel.updateDisplayValue('4') })
                 CalculatorItem(modifier = Modifier
                     .aspectRatio(1f)
                     .weight(1f),
                     action = "5",
                     textColor = White,
                     background = Gray,
-                    onClick = {})
+                    onClick = { viewModel.updateDisplayValue('5') })
                 CalculatorItem(modifier = Modifier
                     .aspectRatio(1f)
                     .weight(1f),
                     action = "6",
                     textColor = White,
                     background = Gray,
-                    onClick = {})
+                    onClick = { viewModel.updateDisplayValue('6') })
                 CalculatorItem(modifier = Modifier
                     .aspectRatio(1f)
                     .weight(1f),
                     action = "-",
                     textColor = White,
                     background = Orange,
-                    onClick = {})
+                    onClick = { viewModel.setOperation("-") })
             }
 
             // 4th row
@@ -158,28 +165,28 @@ fun MainScreen() {
                     action = "1",
                     textColor = White,
                     background = Gray,
-                    onClick = {})
+                    onClick = { viewModel.updateDisplayValue('1') })
                 CalculatorItem(modifier = Modifier
                     .aspectRatio(1f)
                     .weight(1f),
                     action = "2",
                     textColor = White,
                     background = Gray,
-                    onClick = {})
+                    onClick = { viewModel.updateDisplayValue('2') })
                 CalculatorItem(modifier = Modifier
                     .aspectRatio(1f)
                     .weight(1f),
                     action = "3",
                     textColor = White,
                     background = Gray,
-                    onClick = {})
+                    onClick = { viewModel.updateDisplayValue('3') })
                 CalculatorItem(modifier = Modifier
                     .aspectRatio(1f)
                     .weight(1f),
                     action = "+",
                     textColor = White,
                     background = Orange,
-                    onClick = {})
+                    onClick = { viewModel.setOperation("+") })
             }
 
             // 5th row
@@ -194,14 +201,14 @@ fun MainScreen() {
                     action = "0",
                     textColor = White,
                     background = Gray,
-                    onClick = {})
+                    onClick = { viewModel.updateDisplayValue('0') })
                 CalculatorItem(modifier = Modifier
                     .aspectRatio(1f)
                     .weight(1f),
                     action = ".",
                     textColor = White,
                     background = Gray,
-                    onClick = {})
+                    onClick = { viewModel.updateDisplayValue('.') })
                 CalculatorItem(
                     modifier = Modifier
                         .aspectRatio(1f)
@@ -209,7 +216,7 @@ fun MainScreen() {
                     action = "=",
                     textColor = White,
                     background = Orange,
-                    onClick = {}
+                    onClick = { viewModel.calculate() }
                 )
             }
         }
