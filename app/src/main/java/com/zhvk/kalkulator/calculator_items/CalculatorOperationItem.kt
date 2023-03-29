@@ -4,6 +4,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.unit.sp
 import com.zhvk.kalkulator.ui.theme.Orange
 import com.zhvk.kalkulator.ui.theme.White
 
@@ -27,6 +28,7 @@ fun CalculatorOperationItem(
     CalculatorItem(
         modifier = modifier,
         action = action,
+        textSize = 40.sp,
         textColor = textColor.value,
         background = backgroundColor.value,
         onClick = onClick

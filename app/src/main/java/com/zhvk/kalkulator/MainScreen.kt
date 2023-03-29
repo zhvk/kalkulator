@@ -195,6 +195,7 @@ fun MainScreen(
                     .aspectRatio(1f)
                     .weight(1f),
                     action = Constants.EQUALS,
+                    textSize = 40.sp,
                     textColor = White,
                     background = Orange,
                     onClick = { viewModel.calculate(true) })

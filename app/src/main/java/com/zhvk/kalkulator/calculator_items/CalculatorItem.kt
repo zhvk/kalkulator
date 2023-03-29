@@ -10,11 +10,12 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.sp
 
 @Composable
 fun CalculatorItem(
-    modifier: Modifier, action: String, textColor: Color, background: Color, onClick: () -> Unit
+    modifier: Modifier, action: String, textSize: TextUnit, textColor: Color, background: Color, onClick: () -> Unit
 ) {
     Box(
         modifier = Modifier
@@ -27,7 +28,7 @@ fun CalculatorItem(
         Text(
             text = action,
             color = textColor,
-            fontSize = 32.sp
+            fontSize = textSize
         )
 
     }
