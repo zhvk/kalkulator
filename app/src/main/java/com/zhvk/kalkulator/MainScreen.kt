@@ -60,24 +60,24 @@ fun MainScreen(
                 CalculatorSecondaryOperationItem(modifier = Modifier
                     .aspectRatio(1f)
                     .weight(1f),
-                    action = "AC",
+                    action = Constants.AC,
                     onClick = { viewModel.allClear() })
                 CalculatorSecondaryOperationItem(modifier = Modifier
                     .aspectRatio(1f)
                     .weight(1f),
-                    action = "+/-",
+                    action = Constants.REVERSE,
                     onClick = { viewModel.reverseNumberSign() })
                 CalculatorSecondaryOperationItem(modifier = Modifier
                     .aspectRatio(1f)
                     .weight(1f),
-                    action = "%",
+                    action = Constants.PERCENTAGE,
                     onClick = { viewModel.toDecimal() })
                 CalculatorOperationItem(
                     modifier = Modifier
                         .aspectRatio(1f)
                         .weight(1f),
-                    action = "/",
-                    onClick = { viewModel.setOperation("/") },
+                    action = Constants.DIVISION,
+                    onClick = { viewModel.setOperation(Constants.DIVISION) },
                     viewModel.getOperation()
                 )
             }
@@ -107,8 +107,8 @@ fun MainScreen(
                     modifier = Modifier
                         .aspectRatio(1f)
                         .weight(1f),
-                    action = "X",
-                    onClick = { viewModel.setOperation("X") },
+                    action = Constants.MULTIPLICATION,
+                    onClick = { viewModel.setOperation(Constants.MULTIPLICATION) },
                     viewModel.getOperation()
                 )
             }
@@ -138,8 +138,8 @@ fun MainScreen(
                     modifier = Modifier
                         .aspectRatio(1f)
                         .weight(1f),
-                    action = "-",
-                    onClick = { viewModel.setOperation("-") },
+                    action = Constants.SUBTRACTION,
+                    onClick = { viewModel.setOperation(Constants.SUBTRACTION) },
                     viewModel.getOperation()
                 )
             }
@@ -169,8 +169,8 @@ fun MainScreen(
                     modifier = Modifier
                         .aspectRatio(1f)
                         .weight(1f),
-                    action = "+",
-                    onClick = { viewModel.setOperation("+") },
+                    action = Constants.ADDITION,
+                    onClick = { viewModel.setOperation(Constants.ADDITION) },
                     selectedOperation = viewModel.getOperation()
                 )
             }
@@ -194,7 +194,7 @@ fun MainScreen(
                 CalculatorItem(modifier = Modifier
                     .aspectRatio(1f)
                     .weight(1f),
-                    action = "=",
+                    action = Constants.EQUALS,
                     textColor = White,
                     background = Orange,
                     onClick = { viewModel.calculate(true) })

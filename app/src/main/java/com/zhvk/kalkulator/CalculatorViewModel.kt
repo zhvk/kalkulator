@@ -80,17 +80,17 @@ class CalculatorViewModel : ViewModel() {
         var result: Double? = null
 
         when (_uiState.value.operation) {
-            "/" -> {
+            Constants.DIVISION -> {
                 result = if (operand1 == null || operand2 == null || operand2 == 0.0) null
                 else operand1 / operand2
             }
-            "X" -> {
+            Constants.MULTIPLICATION -> {
                 if (operand1 != null && operand2 != null) result = operand1 * operand2
             }
-            "-" -> {
+            Constants.SUBTRACTION -> {
                 if (operand1 != null && operand2 != null) result = operand1 - operand2
             }
-            "+" -> {
+            Constants.ADDITION -> {
                 if (operand1 != null && operand2 != null) result = operand1 + operand2
             }
             else -> {
@@ -136,7 +136,7 @@ class CalculatorViewModel : ViewModel() {
             currentState.copy(
                 firstOperand = currentState.displayedValue,
                 secondOperand = "-1",
-                operation = "X",
+                operation = Constants.MULTIPLICATION,
             )
         }
         calculate(true)
@@ -154,7 +154,7 @@ class CalculatorViewModel : ViewModel() {
             currentState.copy(
                 firstOperand = currentState.displayedValue,
                 secondOperand = "100",
-                operation = "/"
+                operation = Constants.DIVISION
             )
         }
         calculate(true)
