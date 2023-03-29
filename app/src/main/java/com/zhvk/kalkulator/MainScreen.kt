@@ -13,7 +13,9 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewmodel.compose.viewModel
-import com.zhvk.kalkulator.ui.theme.*
+import com.zhvk.kalkulator.ui.theme.Black
+import com.zhvk.kalkulator.ui.theme.Orange
+import com.zhvk.kalkulator.ui.theme.White
 
 @Composable
 fun MainScreen(
@@ -51,34 +53,30 @@ fun MainScreen(
                 horizontalArrangement = Arrangement.spacedBy(itemSpacing),
                 verticalAlignment = Alignment.CenterVertically
             ) {
-                CalculatorItem(modifier = Modifier
-                    .aspectRatio(1f)
-                    .weight(1f),
+                CalculatorSecondaryOperationItem(
+                    modifier = Modifier
+                        .aspectRatio(1f)
+                        .weight(1f),
                     action = "C",
-                    textColor = Black,
-                    background = Platinum,
                     onClick = {})
-                CalculatorItem(modifier = Modifier
+                CalculatorSecondaryOperationItem(modifier = Modifier
                     .aspectRatio(1f)
                     .weight(1f),
                     action = "AC",
-                    textColor = Black,
-                    background = Platinum,
                     onClick = {})
-                CalculatorItem(modifier = Modifier
+                CalculatorSecondaryOperationItem(modifier = Modifier
                     .aspectRatio(1f)
                     .weight(1f),
                     action = "+/-",
-                    textColor = Black,
-                    background = Platinum,
                     onClick = {})
-                CalculatorItem(modifier = Modifier
-                    .aspectRatio(1f)
-                    .weight(1f),
+                CalculatorOperationItem(
+                    modifier = Modifier
+                        .aspectRatio(1f)
+                        .weight(1f),
                     action = "/",
-                    textColor = White,
-                    background = Orange,
-                    onClick = { viewModel.setOperation("/") })
+                    onClick = { viewModel.setOperation("/") },
+                    viewModel.getOperation()
+                )
             }
 
             // 2nd row
@@ -87,34 +85,29 @@ fun MainScreen(
                 horizontalArrangement = Arrangement.spacedBy(itemSpacing),
                 verticalAlignment = Alignment.CenterVertically
             ) {
-                CalculatorItem(modifier = Modifier
+                CalculatorNumberItem(modifier = Modifier
                     .aspectRatio(1f)
                     .weight(1f),
                     action = "7",
-                    textColor = White,
-                    background = Gray,
                     onClick = { viewModel.typeNumber('7') })
-                CalculatorItem(modifier = Modifier
+                CalculatorNumberItem(modifier = Modifier
                     .aspectRatio(1f)
                     .weight(1f),
                     action = "8",
-                    textColor = White,
-                    background = Gray,
                     onClick = { viewModel.typeNumber('8') })
-                CalculatorItem(modifier = Modifier
+                CalculatorNumberItem(modifier = Modifier
                     .aspectRatio(1f)
                     .weight(1f),
                     action = "9",
-                    textColor = White,
-                    background = Gray,
                     onClick = { viewModel.typeNumber('9') })
-                CalculatorItem(modifier = Modifier
-                    .aspectRatio(1f)
-                    .weight(1f),
+                CalculatorOperationItem(
+                    modifier = Modifier
+                        .aspectRatio(1f)
+                        .weight(1f),
                     action = "X",
-                    textColor = White,
-                    background = Orange,
-                    onClick = { viewModel.setOperation("X") })
+                    onClick = { viewModel.setOperation("X") },
+                    viewModel.getOperation()
+                )
             }
 
             // 3rd row
@@ -123,34 +116,29 @@ fun MainScreen(
                 horizontalArrangement = Arrangement.spacedBy(itemSpacing),
                 verticalAlignment = Alignment.CenterVertically
             ) {
-                CalculatorItem(modifier = Modifier
+                CalculatorNumberItem(modifier = Modifier
                     .aspectRatio(1f)
                     .weight(1f),
                     action = "4",
-                    textColor = White,
-                    background = Gray,
                     onClick = { viewModel.typeNumber('4') })
-                CalculatorItem(modifier = Modifier
+                CalculatorNumberItem(modifier = Modifier
                     .aspectRatio(1f)
                     .weight(1f),
                     action = "5",
-                    textColor = White,
-                    background = Gray,
                     onClick = { viewModel.typeNumber('5') })
-                CalculatorItem(modifier = Modifier
+                CalculatorNumberItem(modifier = Modifier
                     .aspectRatio(1f)
                     .weight(1f),
                     action = "6",
-                    textColor = White,
-                    background = Gray,
                     onClick = { viewModel.typeNumber('6') })
-                CalculatorItem(modifier = Modifier
-                    .aspectRatio(1f)
-                    .weight(1f),
+                CalculatorOperationItem(
+                    modifier = Modifier
+                        .aspectRatio(1f)
+                        .weight(1f),
                     action = "-",
-                    textColor = White,
-                    background = Orange,
-                    onClick = { viewModel.setOperation("-") })
+                    onClick = { viewModel.setOperation("-") },
+                    viewModel.getOperation()
+                )
             }
 
             // 4th row
@@ -159,34 +147,29 @@ fun MainScreen(
                 horizontalArrangement = Arrangement.spacedBy(itemSpacing),
                 verticalAlignment = Alignment.CenterVertically
             ) {
-                CalculatorItem(modifier = Modifier
+                CalculatorNumberItem(modifier = Modifier
                     .aspectRatio(1f)
                     .weight(1f),
                     action = "1",
-                    textColor = White,
-                    background = Gray,
                     onClick = { viewModel.typeNumber('1') })
-                CalculatorItem(modifier = Modifier
+                CalculatorNumberItem(modifier = Modifier
                     .aspectRatio(1f)
                     .weight(1f),
                     action = "2",
-                    textColor = White,
-                    background = Gray,
                     onClick = { viewModel.typeNumber('2') })
-                CalculatorItem(modifier = Modifier
+                CalculatorNumberItem(modifier = Modifier
                     .aspectRatio(1f)
                     .weight(1f),
                     action = "3",
-                    textColor = White,
-                    background = Gray,
                     onClick = { viewModel.typeNumber('3') })
-                CalculatorItem(modifier = Modifier
-                    .aspectRatio(1f)
-                    .weight(1f),
+                CalculatorOperationItem(
+                    modifier = Modifier
+                        .aspectRatio(1f)
+                        .weight(1f),
                     action = "+",
-                    textColor = White,
-                    background = Orange,
-                    onClick = { viewModel.setOperation("+") })
+                    onClick = { viewModel.setOperation("+") },
+                    selectedOperation = viewModel.getOperation()
+                )
             }
 
             // 5th row
@@ -195,29 +178,23 @@ fun MainScreen(
                 horizontalArrangement = Arrangement.spacedBy(itemSpacing),
                 verticalAlignment = Alignment.CenterVertically
             ) {
-                CalculatorItem(modifier = Modifier
+                CalculatorNumberItem(modifier = Modifier
                     .aspectRatio(2f)
                     .weight(2f),
                     action = "0",
-                    textColor = White,
-                    background = Gray,
                     onClick = { viewModel.typeNumber('0') })
-                CalculatorItem(modifier = Modifier
+                CalculatorNumberItem(modifier = Modifier
                     .aspectRatio(1f)
                     .weight(1f),
                     action = ".",
-                    textColor = White,
-                    background = Gray,
                     onClick = { viewModel.typeNumber('.') })
-                CalculatorItem(
-                    modifier = Modifier
-                        .aspectRatio(1f)
-                        .weight(1f),
+                CalculatorItem(modifier = Modifier
+                    .aspectRatio(1f)
+                    .weight(1f),
                     action = "=",
                     textColor = White,
                     background = Orange,
-                    onClick = { viewModel.calculate() }
-                )
+                    onClick = { viewModel.calculate() })
             }
         }
     }

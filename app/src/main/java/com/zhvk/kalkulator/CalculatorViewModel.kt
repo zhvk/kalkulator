@@ -57,6 +57,11 @@ class CalculatorViewModel : ViewModel() {
         }
     }
 
+    fun getOperation(): String? {
+        return if (_uiState.value.isOperationClicked) _uiState.value.operation
+        else null
+    }
+
     fun calculate() {
         val operand1 = _uiState.value.firstOperand?.toDoubleOrNull()
         val operand2 = _uiState.value.secondOperand?.toDoubleOrNull()
