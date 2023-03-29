@@ -57,22 +57,21 @@ fun MainScreen(
                 horizontalArrangement = Arrangement.spacedBy(itemSpacing),
                 verticalAlignment = Alignment.CenterVertically
             ) {
-                CalculatorSecondaryOperationItem(
-                    modifier = Modifier
-                        .aspectRatio(1f)
-                        .weight(1f),
-                    action = "C",
-                    onClick = {})
                 CalculatorSecondaryOperationItem(modifier = Modifier
                     .aspectRatio(1f)
                     .weight(1f),
                     action = "AC",
-                    onClick = {})
+                    onClick = { viewModel.allClear() })
                 CalculatorSecondaryOperationItem(modifier = Modifier
                     .aspectRatio(1f)
                     .weight(1f),
                     action = "+/-",
-                    onClick = {})
+                    onClick = { viewModel.reverseNumberSign() })
+                CalculatorSecondaryOperationItem(modifier = Modifier
+                    .aspectRatio(1f)
+                    .weight(1f),
+                    action = "%",
+                    onClick = { viewModel.toDecimal() })
                 CalculatorOperationItem(
                     modifier = Modifier
                         .aspectRatio(1f)
@@ -198,7 +197,7 @@ fun MainScreen(
                     action = "=",
                     textColor = White,
                     background = Orange,
-                    onClick = { viewModel.calculate() })
+                    onClick = { viewModel.calculate(true) })
             }
         }
     }

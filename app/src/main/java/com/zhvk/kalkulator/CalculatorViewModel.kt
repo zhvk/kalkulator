@@ -1,5 +1,6 @@
 package com.zhvk.kalkulator
 
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -12,6 +13,7 @@ data class CalculatorUiState(
     val secondOperand: String? = null,
     val operation: String = "",
     val isOperationClicked: Boolean = false,
+    val isEqualsClicked: Boolean = false
 )
 
 class CalculatorViewModel : ViewModel() {
@@ -19,17 +21,25 @@ class CalculatorViewModel : ViewModel() {
     private val _uiState = MutableStateFlow(CalculatorUiState())
     val uiState: StateFlow<CalculatorUiState> = _uiState.asStateFlow()
 
+    // TODO: Improve logic to not use copy constructor so much
+
     fun typeNumber(char: Char) {
+        Log.d("Debug", "typeNumber($char)")
+
         _uiState.update { currentState ->
             val newValue: String
 
-            // Start typing new value after operation is clicked
-            if (currentState.isOperationClicked) {
+            // Start typing new value after operation or if equals is clicked
+            if (currentState.isOperationClicked || currentState.isEqualsClicked) {
+                // Clear memory only when equals was previously clicked
+                if (currentState.isEqualsClicked && !currentState.isOperationClicked) allClear()
+
                 newValue = char.toString()
                 currentState.copy(
                     displayedValue = newValue,
                     secondOperand = newValue,
                     isOperationClicked = false,
+                    isEqualsClicked = false
                 )
             } else {
                 newValue = if (currentState.displayedValue == "0") char.toString()
@@ -43,10 +53,12 @@ class CalculatorViewModel : ViewModel() {
     }
 
     fun setOperation(operation: String) {
+        Log.d("Debug", "setOperation($operation)")
+
         // This shows result when user consecutively presses operation buttons
         if (_uiState.value.firstOperand != null && _uiState.value.secondOperand != null
-            && !_uiState.value.isOperationClicked
-        ) calculate()
+            && !_uiState.value.isOperationClicked && !_uiState.value.isEqualsClicked
+        ) calculate(false)
 
         _uiState.update { currentState ->
             currentState.copy(
@@ -62,7 +74,7 @@ class CalculatorViewModel : ViewModel() {
         else null
     }
 
-    fun calculate() {
+    fun calculate(isEqualsPressed: Boolean) {
         val operand1 = _uiState.value.firstOperand?.toDoubleOrNull()
         val operand2 = _uiState.value.secondOperand?.toDoubleOrNull()
         var result: Double? = null
@@ -86,12 +98,53 @@ class CalculatorViewModel : ViewModel() {
             }
         }
 
+        Log.d("Debug", "calculate($operand1 ${_uiState.value.operation} $operand2 = $result)")
+
+
         _uiState.update { currentState ->
             currentState.copy(
                 displayedValue = fixResult(result),
-                firstOperand = fixResult(result)
+                firstOperand = fixResult(result),
+                isEqualsClicked = isEqualsPressed
             )
         }
+    }
+
+    fun reverseNumberSign() {
+        /*_uiState.update { currentState ->
+            currentState.copy(
+                firstOperand = currentState.displayedValue,
+                operation = "/",
+                secondOperand = "-1"
+            )
+        }
+        calculate(true)*/
+    }
+
+    fun allClear() {
+        Log.d("Debug", "allClear()")
+        _uiState.update { currentState ->
+            currentState.copy(
+                displayedValue = "0",
+                firstOperand = null,
+                secondOperand = null,
+                operation = "",
+                isOperationClicked = false,
+                isEqualsClicked = false
+            )
+        }
+    }
+
+    fun toDecimal() {
+        Log.d("Debug", "toDecimal()")
+        _uiState.update { currentState ->
+            currentState.copy(
+                firstOperand = currentState.displayedValue,
+                secondOperand = "100",
+                operation = "/"
+            )
+        }
+        calculate(true)
     }
 
     private fun fixResult(result: Double?): String {
