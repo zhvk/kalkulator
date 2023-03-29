@@ -23,6 +23,8 @@ class CalculatorViewModel : ViewModel() {
 
     // TODO: Improve logic to not use copy constructor so much
 
+    // TODO: Implement history. This can help to optimise the ViewModel logic
+
     fun typeNumber(char: Char) {
         Log.d("Debug", "typeNumber($char)")
 
