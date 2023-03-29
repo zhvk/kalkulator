@@ -13,6 +13,10 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewmodel.compose.viewModel
+import com.zhvk.kalkulator.calculator_items.CalculatorItem
+import com.zhvk.kalkulator.calculator_items.CalculatorNumberItem
+import com.zhvk.kalkulator.calculator_items.CalculatorOperationItem
+import com.zhvk.kalkulator.calculator_items.CalculatorSecondaryOperationItem
 import com.zhvk.kalkulator.ui.theme.Black
 import com.zhvk.kalkulator.ui.theme.Orange
 import com.zhvk.kalkulator.ui.theme.White

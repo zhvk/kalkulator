@@ -1,4 +1,4 @@
-package com.zhvk.kalkulator
+package com.zhvk.kalkulator.calculator_items
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
