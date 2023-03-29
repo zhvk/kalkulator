@@ -110,17 +110,6 @@ class CalculatorViewModel : ViewModel() {
         }
     }
 
-    fun reverseNumberSign() {
-        /*_uiState.update { currentState ->
-            currentState.copy(
-                firstOperand = currentState.displayedValue,
-                operation = "/",
-                secondOperand = "-1"
-            )
-        }
-        calculate(true)*/
-    }
-
     fun allClear() {
         Log.d("Debug", "allClear()")
         _uiState.update { currentState ->
@@ -135,8 +124,32 @@ class CalculatorViewModel : ViewModel() {
         }
     }
 
+    fun reverseNumberSign() {
+        Log.d("Debug", "reverseNumberSign()")
+
+        // If memory is not empty, first calculate data from memory
+        if (_uiState.value.firstOperand != null && _uiState.value.secondOperand != null
+            && !_uiState.value.isOperationClicked && !_uiState.value.isEqualsClicked
+        ) calculate(false)
+
+        _uiState.update { currentState ->
+            currentState.copy(
+                firstOperand = currentState.displayedValue,
+                secondOperand = "-1",
+                operation = "X",
+            )
+        }
+        calculate(true)
+    }
+
     fun toDecimal() {
         Log.d("Debug", "toDecimal()")
+
+        // If memory is not empty, first calculate data from memory
+        if (_uiState.value.firstOperand != null && _uiState.value.secondOperand != null
+            && !_uiState.value.isOperationClicked && !_uiState.value.isEqualsClicked
+        ) calculate(false)
+
         _uiState.update { currentState ->
             currentState.copy(
                 firstOperand = currentState.displayedValue,
